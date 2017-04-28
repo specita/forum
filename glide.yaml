@@ -1,3 +1,10 @@
 package: forum
 import:
 - package: github.com/go-martini/martini
+- package: github.com/martini-contrib/render
+- package: github.com/jinzhu/configor
+- package: github.com/Sirupsen/logrus
+- package: github.com/pborman/uuid
+- package: github.com/martini-contrib/binding
+- package: github.com/xyproto/permissions2
+  version: "2.2"
