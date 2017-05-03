@@ -7,4 +7,6 @@ import:
 - package: github.com/pborman/uuid
 - package: github.com/martini-contrib/binding
 - package: github.com/xyproto/permissions2
-  version: "2.2"
+  version:
+- package: github.com/stretchr/testify
+  version: ^1.1.4

@@ -2,6 +2,7 @@ package api
 
 import (
 	"forum/api/handler"
+	"forum/api/middleware/tx"
 	"forum/api/vo"
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/binding"
@@ -34,22 +35,28 @@ func ArticleRouter(r martini.Router) {
 	r.Post("/new", binding.Bind(vo.ArticleForm{}), handler.NewArticle)
 
 	//删贴
-	r.Post("/delete", binding.Bind(vo.DelArticleForm{}), handler.DeleteArticle)
+	r.Delete("/:ID", binding.Bind(vo.DelArticleForm{}), tx.Transaction(), handler.DeleteArticle)
 
 	//更新
-	r.Post("/update")
+	r.Put("/:ID", binding.Bind(vo.UpdateArticleForm{}), tx.Transaction(), handler.UpdateArticle)
 
 	//搜索
 	r.Get("/search")
 
 	//展现所有
-	r.Get("/list")
+	r.Get("", binding.Bind(vo.ArticlesForm{}), handler.AllArticles)
+
+	//查询单个,点击帖子进入
+	r.Get("/:ID", handler.ArticlePass)
+
+	//审核状态修改
+	r.Patch("/pass/:ID", handler.ArticlePass)
 }
 
 //评论相关
 func CommentRouter(r martini.Router) {
 	//给帖子发表评论
-	r.Post("/new:artcile_id", binding.Bind(vo.ArticleForm{}), handler.NewArticle)
+	r.Post("/new/:ID", handler.NewArticle)
 
 	//回复某人
 	r.Post("/reply")

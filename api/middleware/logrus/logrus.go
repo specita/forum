@@ -25,6 +25,6 @@ func Logger() martini.Handler {
 		rw := res.(martini.ResponseWriter)
 		c.Next()
 
-		log.Printf("hahahhahahah %v %s in %v\n", rw.Status(), http.StatusText(rw.Status()), time.Since(start))
+		log.Printf("completed %v %s in %v\n", rw.Status(), http.StatusText(rw.Status()), time.Since(start))
 	}
 }

@@ -2,7 +2,7 @@ package model
 
 import "time"
 
-//版块
+//版块=企业咕咚的企业
 type SubForum struct {
 	ID          int
 	Name        string

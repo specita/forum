@@ -1,22 +1,27 @@
 package vo
 
-import (
-	"time"
-)
-
-type ArticleForm struct {
-	Title        string    `json:"title"`
-	AuthorID     int       `json:"authodID"`
-	AuthorName   string    `json:"authorName"`
-	CreatedOn    time.Time `json:"createdOn"`
-	LastUpdateOn time.Time `json:"lastUpdateOn"`
-	BlackUserIDs []int     `json:"blackUsersIDs"`
-	Content      string    `json:"content"`
-	//图片压缩包路径,TODO 手机端可以设置压缩，但网页端？？
-	Images []string `json:"images"`
+//用于列表展现
+type Article struct {
+	ID         int    `json:"id"`
+	Title      string `json:"title"`
+	AuthorID   string `json:"author_id" binding:"required"`
+	AuthorName string `json:"author_name"`
+	//摘要
+	Abstract      string `json:"abstract"`
+	ContainImage  bool   `json:"contain_image"`
+	Hits          int    `json:"hits"`
+	TotalComments int    `json:"total_comments"`
 }
 
-type DelArticleForm struct {
-	ArticleID  string `json:"articleID" binding:"required"`
-	OperatorID string `json:"operatorID" binding:"required"`
+//用于进入帖子获取详情
+type ArticleDetail struct {
+	ID            int       `json:"id"`
+	Title         string    `json:"title"`
+	AuthorID      string    `json:"author_id" binding:"required"`
+	AuthorName    string    `json:"author_name"`
+	Content       string    `json:"content"`
+	Images        []string  `json:"images"`
+	Hits          int       `json:"hits"`
+	TotalComments int       `json:"total_comments"`
+	Comments      []Comment `json:"comments"`
 }
